@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Case {
-    protected ArrayList<String> cases = new ArrayList<>();
+    protected List<String> cases = new ArrayList<>();
 
     public void setCase(String caseName) {
         cases.add(caseName);
@@ -16,14 +17,23 @@ public class Case {
     }
 
     public void deleteByKeyWord(String keyword) {
-        ArrayList<String> toRemove = new ArrayList<>();
+        List<String> toRemove = new ArrayList<>();
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            System.out.println("Ключевое слово не может быть пустым!");
+            return;
+        }
         for (String task : cases) {
             if (task.toLowerCase().contains(keyword.toLowerCase())) {
                 toRemove.add(task);
             }
         }
-        cases.removeAll(toRemove);
-        System.out.println("Удалено задач: " + toRemove.size());
+        if (toRemove.isEmpty()) {
+            System.out.println("Задач с ключевым словом \"" + keyword + "\" не найдено!");
+        } else {
+            cases.removeAll(toRemove);
+            System.out.println("Удалено задач: " + toRemove.size());
+        }
     }
 
     public void delete(String caseName) {
