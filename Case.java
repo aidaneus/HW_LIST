@@ -37,11 +37,19 @@ public class Case {
     }
 
     public void delete(String caseName) {
+        if (caseName == null || !cases.contains(caseName)) {
+            System.out.println("Нет такого дела");
+            return;
+        }
         cases.remove(caseName);
         System.out.println("Удалено!");
     }
 
     public void delete(int num) {
+        if (num < 1 || num > cases.size()) {
+            System.out.println("Нет такого дела");
+            return;
+        }
         cases.remove(num - 1);
         System.out.println("Удалено!");
     }
